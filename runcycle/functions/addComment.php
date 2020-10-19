@@ -2,9 +2,10 @@
     session_start();
     require_once "common.php";
     $dao = new CommentDAO();
-
+    
     
     $isAddOk = $dao -> addComment($_GET['event_id'], $_SESSION['token'], $_GET['content']);
+    // var_dump($_GET['event_id'], $_SESSION['token'], $_GET['content']);
     
 
     $result_arr = array();
@@ -18,12 +19,14 @@
         echo json_encode($result_arr);
     }
     else {
-        // set response code - 404 Not found
-        http_response_code(404);
+
       
         // tell the user no items found
         echo json_encode(
-            array("message" => "No items found."));
+            array("message" => $isAddOk));
+
+        // set response code - 404 Not found
+        http_response_code(404);
     }
  
 ?>

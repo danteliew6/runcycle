@@ -20,7 +20,7 @@ if(isset($data)) {
     $result_arr = array();
     $result_arr["records"] = array();
 
-    foreach ($comment as $data) {
+    foreach ($data as $comment) {
 
         $item = array(
             "event_id" => $comment->getEventId(),
@@ -31,7 +31,7 @@ if(isset($data)) {
 
         array_push($result_arr["records"], $item);
     }
-
+    // var_dump($result_arr);
     // Add info node (1 per response)
     $date = new DateTime(null, new DateTimeZone('Asia/Singapore'));
     $result_arr["info"] = array(

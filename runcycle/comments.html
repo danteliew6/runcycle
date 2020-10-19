@@ -30,13 +30,84 @@
             <label for="event_id">Event_id</label>
             <input type = "text" id = "event_id">
         </div>
-        <button type="button" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-primary" id = "addComment">Submit</button>
     </form>
+    
+    <h1 id = "success"></h1>
 
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">event_id</th>
+            <th scope="col">username</th>
+            <th scope="col">content</th>
+            <th scope="col">timestamp</th>
+          </tr>
+        </thead>
+        <tbody id = "comments">
+  
+        </tbody>
+      </table>
 
 </body>
 
+<script>
+    document.getElementById('addComment').addEventListener('click', addComment);
+    window.onload = getComments();
 
+    function addComment() {
+        const url = "functions/addComment.php?";
+        const request = new XMLHttpRequest;
+
+        let comment = document.getElementById("comment").value;
+        let event_id = document.getElementById("event_id").value;
+        let query = `content=${comment}&event_id=${event_id}`;
+
+        request.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById('success').innerHTML = `Comment ${comment} successfully added to ${event_id}!`;
+            }
+        }
+
+        request.open("GET", `${url}` + `${query}`, true);
+        request.send();
+        
+        getComments();
+
+    }
+
+    function getComments() {
+        const url = "functions/getComments.php?";
+        const request = new XMLHttpRequest;
+
+        const event_id = 1;
+        let query = `event_id=${event_id}`;
+
+        let tbody = document.getElementById('comments');
+        tbody.innerHTML = "";
+        request.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                const data = JSON.parse(this.responseText);
+                
+                for (let content of data.records) {
+                    tbody.innerHTML += `<tr>
+                        <td>${content.event_id}</td>
+                        <td>${content.username}</td>
+                        <td>${content.content}</td>
+                        <td>${content.created_datetime}</td>
+                    </tr>`
+                
+                }
+                
+                
+            }
+        }
+
+        request.open("GET", `${url}` + `${query}`, true);
+        request.send();
+    }
+
+</script>
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -50,3 +121,4 @@
 </script>
 
 </html>
+

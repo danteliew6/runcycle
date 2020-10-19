@@ -1,18 +1,18 @@
 <?php
     class CommentDAO{
 
+        // pass in comment details, adds the comment into the database
         public function addComment($event_id, $username, $content) {
             $conn = new ConnectionManager();
             $pdo = $conn->getConnection();
-            $created_datetime = date('m/d/Y h:i:s a', time());
             
-            $sql = "INSERT INTO `comment` (`event_id`, `username`, `content`, 'created_datetime') VALUES (:event_id, :username, :content, :created_datetime)";
+            $sql = "INSERT INTO `comment` (`event_id`, `username`, `content`) VALUES (:event_id, :username, :content)";
 
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':event_id', $event_id, PDO::PARAM_STR);
             $stmt->bindParam(':username', $username, PDO::PARAM_STR);
             $stmt->bindParam(':content', $content, PDO::PARAM_STR);
-            $stmt->bindParam(':created_datetime', $created_datetime, PDO::PARAM_STR);
+
 
             $isOk = $stmt->execute();
         
@@ -22,7 +22,7 @@
             return $isOk;
         }
 
-
+        //by inserting an event_id as parameter, get all the comments for that specific event
         public function getComments($event_id) {
             $conn = new ConnectionManager();
             $pdo = $conn->getConnection();
