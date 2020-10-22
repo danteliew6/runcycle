@@ -31,11 +31,14 @@ CREATE TABLE event (
   event_id int(11) NOT NULL AUTO_INCREMENT,
   username varchar(30) NOT NULL,
   title varchar(30) NOT NULL,
-  start_point varchar(30) NOT NULL,
-  end_point varchar(30) NOT NULL,
+  start_point varchar(100) NOT NULL,
+  end_point varchar(100) NOT NULL,
   event_datetime TIMESTAMP NOT NULL,
-  event_desc varchar(100) NOT NULL,
-  capacity int(11) NOT NULL,
+  event_desc varchar(200) NOT NULL,
+  capacity int(5) NOT NULL,
+  activity varchar(20) NOT NULL,
+  duration int(2) NOT NULL,
+  distance FLOAT NOT NULL,
   CONSTRAINT event_pk PRIMARY KEY (event_id),
   CONSTRAINT event_fk FOREIGN KEY (username) references user(username)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8; 

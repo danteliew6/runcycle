@@ -9,7 +9,7 @@ include_once 'common.php';
 $conn = new ConnectionManager();
 $pdo = $conn->getConnection();
 
-$sql = "SELECT * from event";
+$sql = "SELECT * from event order by event_datetime desc";
 
 $stmt = $pdo->prepare($sql);
 $isOk = $stmt->execute();
@@ -35,8 +35,10 @@ if($isOk) {
             "end_point" => $end_point,
             "event_datetime" => $event_datetime,
             "event_desc" => $event_desc,
-            "participants" => $participants,
-            "capacity" => $capacity
+            "capacity" => $capacity,
+            "activity" => $activity,
+            "duration" => $duration,
+            "distance" => $distance
         );
 
         array_push($result_arr["records"], $item);
