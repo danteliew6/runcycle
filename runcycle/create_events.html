@@ -33,19 +33,16 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="home.html">Home
-              <span class="sr-only">(current)</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="meettheteam.html">About</a>
+          <li class="nav-item active">
+            <a class="nav-link" href="create_events.html">Create Event</a>
+            <span class="sr-only">(current)</span>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
+            <a class="nav-link" href="#">Profile</a>
           </li>
         </ul>
       </div>
@@ -125,7 +122,42 @@
                     <div class="col">
                         <textarea maxlength="200" class="form-control" id="description" rows="3" placeholder="Give me Something Exciting in Less than 200 words!"></textarea>
                     </div>
-                </div>                                
+                </div>
+
+
+                <!--- Gmaps controler-->
+                <div class="form-row">
+                    <div class="col-1">
+                        <label for="origin">Origin</label>
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" id="origin">
+                    </div>  
+                    <div class="col-1">  
+                        <label for="destination">Destination</label>
+                    </div>
+                    <div class="col">  
+                        <input type="text" class="form-control" id="destination">
+                    </div>
+                    <div class="col-1">  
+                        <button type="submit" class="btn btn-primary" id = "getDirections">Generate Route!</button>
+                </div>
+                
+                <div class = "container">
+                    <div class = "row">
+                        <div class = "col-6">
+                            <div id="map" ></div>
+                        </div>
+                        <div class = "col-6">
+                            <div id="directionsPanel"></div> 
+                        </div>
+                    </div>
+                    <div class = "row">
+                        <div class = "col" id = "total"></div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary mx-auto" id = "submit Form">Create Event</button>
             </form>
             </div>
         </div>    
@@ -133,32 +165,8 @@
 
 
 
-        <div class = "container">
-            <div class = "row">
-                <div class = "col-6">
-                    <div id="map" ></div>
-                </div>
-                <div class = "col-6">
-                    <div id="directionsPanel"></div> 
-                </div>
-            </div>
-            <div class = "row">
-                <div class = "col" id = "total"></div>
-            </div>
-            <div class = "row">
-                <form>
-                    <div class="form-group">
-                      <label for="origin">Origin</label>
-                      <input type="text" class="form-control" id="origin">
-                    </div>
-                    <div class="form-group">
-                      <label for="destination">Destination</label>
-                      <input type="text" class="form-control" id="destination">
-                    </div>
-                    <button type="submit" class="btn btn-primary" id = "getDirections">Generate Route!</button>
-                  </form>
-            </div>
-        </div>
+
+
     
     
     
