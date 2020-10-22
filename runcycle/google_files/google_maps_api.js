@@ -65,5 +65,5 @@ function computeTotalDistance(result) {
         total += myroute.legs[i].distance.value;
     }
     total = total / 1000;
-    // document.getElementById("total").innerHTML = total + " km";
+    //document.getElementById("total").innerHTML = total + " km";
 }
