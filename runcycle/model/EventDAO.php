@@ -2,7 +2,7 @@
     class EventDAO{
 
         public function addEvent($username, $title, $start_point, $end_point, 
-        $event_datetime, $event_desc, $capacity) {
+        $event_datetime, $event_desc, $capacity, $activity, $duration, $distance) {
 
             if (empty($title)) {
                 $title = "RunCycle Event!";
@@ -16,9 +16,9 @@
             $pdo = $conn->getConnection();
 
             $sql = "INSERT INTO `event` 
-            (`username`, `title`, `start_point`, `end_point`, `event_datetime` , `event_desc`, `capacity`) 
+            (`username`, `title`, `start_point`, `end_point`, `event_datetime` , `event_desc`, `capacity`, `activity`, `duration`, `distance`) 
             VALUES 
-            (:username, :title, :start_point, :end_point, :event_datetime , :event_desc, :capacity)";
+            (:username, :title, :start_point, :end_point, :event_datetime , :event_desc, :capacity, :activity, :duration, :distance)";
 
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':username', $username, PDO::PARAM_STR);
@@ -28,6 +28,10 @@
             $stmt->bindParam(':event_datetime', $event_datetime, PDO::PARAM_STR);
             $stmt->bindParam(':event_desc', $event_desc, PDO::PARAM_STR);
             $stmt->bindParam(':capacity', $capacity, PDO::PARAM_STR);
+            $stmt->bindParam(':activity', $activity, PDO::PARAM_STR);
+            $stmt->bindParam(':duration', $duration, PDO::PARAM_STR);
+            $stmt->bindParam(':distance', $distance, PDO::PARAM_STR);
+
 
 
             $isOk = $stmt->execute();
@@ -53,7 +57,7 @@
 
             while($row = $stmt->fetch()) {
                 return new Event($row['event_id'], $row['username'], $row['title'], $row['start_point'], $row['end_point'],
-                $row['event_datetime'], $row['event_desc'], $row['capacity']);
+                $row['event_datetime'], $row['event_desc'], $row['capacity'], $row['activity'],$row['duration'], $row['distance']);
             }
         
             // (:username, :title, :start_point, :end_point, :event_datetime , :event_desc, :participants, :capacity)
