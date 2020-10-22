@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!-- <link rel = "stylesheet" href = "Style.css"/> -->
+
+<section id= "top-banner">
+    <div class="container">
+        <h1 class="heading">Simple Weather App</h1>
+        <form>
+          <input type="text" placeholder="Search for a city" id="search-text" autofocus>
+          <button type="submit" id="search-button">SUBMIT</button>
+          <span id="msg"></span>
+        </form>
+    </div>
+</section>
+
+  <section class="display">
+    <div class="container">
+      <ul id="cities"></ul>
+    </div>
+
+  </section>
+
+  <script>
+      const form = document.getElementById('top-banner');
+      const msg = document.getElementById("msg");
+      const list = document.getElementById("cities");
+
+      const apiKey = "c6145824dcf121ec75f98af056cf43e9";
+      form.addEventListener("submit", getWeather);
+
+        function getWeather() {
+            event.preventDefault();
+            const search = document.getElementById('search-text').value;
+            var request = new XMLHttpRequest();
+
+            request.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200){
+                const data = JSON.parse(this.responseText);
+                const icon = `https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/${data.weather[0]["icon"]}.svg`;
+                //See the whole chunk of data
+                console.log(data);
+    
+               //Country Name
+                var name = data.name;
+                var sys = data.sys;
+                var main = data.main;
+
+                //Description of weather eg Clouds/Rain 
+                var weather = data.weather; 
+                var weatherDescription = weather[0].description;
+
+                //Wind speed
+                var wind = data.wind;
+                var windSpeed = wind.speed;
+
+                const li = document.createElement("li");
+            
+                li.classList.add("city");
+
+                const markup = 
+                `
+                    <h2 class="city-name" data-name="${name},${sys.country}">
+                    <span>${name}</span>
+                    <sup>${sys.country}</sup>
+                    </h2>
+                    <div class="city-temp">${main.temp}<sup>°C</sup></div>
+                    <figure>
+                      <img class="city-icon" src="${icon}" alt="${weather[0]["description"]}">
+                    <figcaption>${weather[0]["description"]}</figcaption>
+                    </figure>
+
+                `;
+                li.innerHTML = markup;  
+                list.appendChild(li);
+                      
+                      }
+                  }
+
+        
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${apiKey}&units=metric`;
+        request.open("GET", url, true);
+        request.send();
+        }
+        
+  </script>
+
+  </html>
