@@ -21,14 +21,14 @@
         <p class= "text-center" style="color:white">Brand Caption</p>
     </div>
     <div class="container border border-secondary col-6">
-        <form>
+        <form action = "functions/validateUser.php" method = "POST">
             <div class="form-group">
-            <label for="email">Email address</label>
-            <input type="email" class="form-control" id="email" placeholder="Email">
+            <label for="username">Username</label>
+            <input type="text" name = "username" size = "20" class="form-control" id="username" placeholder="Max 20 characters">
             </div>
             <div class="form-group">
             <label for="pwd">Password</label>
-            <input type="password" class="form-control" id="pwd" placeholder="Password">
+            <input type="password" name = "password" class="form-control" id="password">
             </div>
         </form>
         <button type="submit" class="btn btn-primary mx-auto d-block">Login</button>
@@ -38,7 +38,6 @@
         <p class="text-center">Do not have an account? <a href="register.html">Register Now!</a></p>
         
     </div>
-    
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
