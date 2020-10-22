@@ -13,7 +13,7 @@
         session_start();
         $message = 'Login successful!';
         $_SESSION['token'] = $username;
-        header("Location: ../createevent.html");
+        header("Location: ../home.html");
         exit();
     }
  
