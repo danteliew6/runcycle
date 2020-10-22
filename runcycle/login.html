@@ -11,6 +11,29 @@
         body {
         background-color:grey;
         }
+       
+      .login-form {
+      width: 340px;
+        margin: 50px auto;
+      }
+      .login-form form {
+        margin-bottom: 15px;
+          background: #f7f7f7;
+          box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+          padding: 30px;
+      }
+      .login-form h2 {
+          margin: 0 0 15px;
+      }
+      .form-control, .btn {
+          min-height: 38px;
+          border-radius: 2px;
+      }
+      .btn {        
+          font-size: 15px;
+          font-weight: bold;
+      }
+
     </style>
 
   </head>
@@ -20,7 +43,10 @@
         <img src="runcyclewhite.png" class='img-fluid mx-auto d-block border border-secondary' height='auto' width: 100%>
         <p class= "text-center" style="color:white">Come and Run with us!</p>
     </div>
-    <div class="container border border-secondary col-6">
+    <!--Don't change-->
+   
+<!--<div class="container border border-secondary col-6">-->
+  <div class="login-form">
         <form action = "functions/validateUser.php" method = "POST">
             <div class="form-group">
             <label for="username">Username</label>
@@ -32,7 +58,9 @@
             </div>
         </form>
         <button type="submit" class="btn btn-primary mx-auto d-block">Login</button>
-    </div>
+  
+  </div>
+    <!--Don't change-->
     <br>
     <div>
         <p class="text-center">Do not have an account? <a href="register.html">Register Now!</a></p>
