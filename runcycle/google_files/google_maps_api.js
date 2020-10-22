@@ -9,7 +9,6 @@ function getDirections() {
         region: 'SG',
         travelMode: 'WALKING'
     };
-    console.log(queries);
 
     const url = "https://maps.googleapis.com/maps/api/js?";
     const request = new XMLHttpRequest();
@@ -46,6 +45,11 @@ function calcRoute(directionsService, directionsRenderer) {
       if (status == 'OK') {
         directionsRenderer.setDirections(result);
         computeTotalDistance(result);
+        document.getElementById('origin').value = result.routes[0].legs[0]['start_address'];
+        document.getElementById('destination').value = result.routes[0].legs[0]['end_address'];
+        
+        console.log(result.routes[0].legs[0]['start_address']); //how to get start point
+        console.log(result.routes[0].legs[0]['end_address']); //how to get end point
       }
       else {
           document.getElementById('map').innerHTML = 'No routes were found, please enter a postal code or more specific address.';
