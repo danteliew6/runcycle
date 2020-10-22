@@ -16,9 +16,9 @@
             $pdo = $conn->getConnection();
 
             $sql = "INSERT INTO `event` 
-            (`username`, `title`, `start_point`, `end_point`, `event_datetime` , `event_desc`, `participants`, `capacity`) 
+            (`username`, `title`, `start_point`, `end_point`, `event_datetime` , `event_desc`, `capacity`) 
             VALUES 
-            (:username, :title, :start_point, :end_point, :event_datetime , :event_desc, 1, :capacity)";
+            (:username, :title, :start_point, :end_point, :event_datetime , :event_desc, :capacity)";
 
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':username', $username, PDO::PARAM_STR);
@@ -53,7 +53,7 @@
 
             while($row = $stmt->fetch()) {
                 return new Event($row['event_id'], $row['username'], $row['title'], $row['start_point'], $row['end_point'],
-                $row['event_datetime'], $row['event_desc'], $row['participants'], $row['capacity']);
+                $row['event_datetime'], $row['event_desc'], $row['capacity']);
             }
         
             // (:username, :title, :start_point, :end_point, :event_datetime , :event_desc, :participants, :capacity)

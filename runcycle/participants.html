@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<?php session_start(); ?>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<style>
+    #map {
+        height: 100%;
+        width: 100%;
+    }
+
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+</style>
+
+<body>
+    <form>
+        <div class="form-group">
+            <label for="event_id">Event_id</label>
+            <input type = "text" id = "event_id">
+        </div>
+        <button type="button" class="btn btn-primary" id = "joinEvent">Join</button>
+    </form>
+    
+    <h1 id = "success"></h1>
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">event_id</th>
+            <th scope="col">username</th>
+          </tr>
+        </thead>
+        <tbody id = "participants">
+  
+        </tbody>
+      </table>
+
+    <button type="button" class="btn btn-primary" id = "join">Join alr?</button>
+
+</body>
+
+<script>
+    document.getElementById('joinEvent').addEventListener('click', joinEvent);
+    window.onload = getParticipants();
+    document.getElementById('join').addEventListener('click', removeParticipant);
+
+    function joinEvent() {
+        const url = "functions/joinEvent.php?";
+        const request = new XMLHttpRequest;
+
+        let event_id = document.getElementById("event_id").value;
+        let query = `event_id=${event_id}`;
+
+        request.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+
+                document.getElementById('success').innerHTML =`Event ${event_id} joined!`;
+            }
+        }
+
+        request.open("GET", `${url}` + `${query}`, true);
+        request.send();
+        
+        getParticipants();
+        checkJoined();
+
+    }
+
+    function getParticipants() {
+        const url = "functions/getParticipants.php?";
+        const request = new XMLHttpRequest;
+
+        const event_id = 1; //hardcode first
+        let query = `event_id=${event_id}`;
+
+        let tbody = document.getElementById('participants');
+        tbody.innerHTML = "";
+        request.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                const data = JSON.parse(this.responseText);
+                
+                for (let content of data.records) {
+                    tbody.innerHTML += `<tr>
+                        <td>${content.event_id}</td>
+                        <td>${content.username}</td>
+                    </tr>`
+                
+                }
+                
+                
+            }
+        }
+
+        request.open("GET", `${url}` + `${query}`, true);
+        request.send();
+    }
+
+    function checkJoined() {
+        const url = "functions/checkJoined.php?";
+        const request = new XMLHttpRequest;
+
+        const event_id = 1; //hardcode first
+        let query = `event_id=${event_id}`;
+
+        let button = document.getElementById('join');
+        button.setAttribute('class', 'btn btn-primary');
+        request.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                button.setAttribute('class', 'btn btn-danger');
+                }
+                
+                
+            }
+
+        request.open("GET", `${url}` + `${query}`, true);
+        request.send();
+    }
+
+    function removeParticipant() {
+        const url = "functions/removeParticipant.php?";
+        const request = new XMLHttpRequest;
+
+        const event_id = 1; //hardcode first
+        let query = `event_id=${event_id}`;
+
+        let button = document.getElementById('join');
+        request.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                button.setAttribute('class', 'btn btn-primary');
+                }
+                
+                
+            }
+
+        request.open("GET", `${url}` + `${query}`, true);
+        request.send();
+
+        getParticipants();
+    }
+
+</script>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+</script>
+
+</html>
+

@@ -1,8 +1,5 @@
 <?php
     class Event{
-
-
-
         private $event_id;
         private $username;
         private $title;
@@ -10,12 +7,11 @@
         private $end_point;
         private $event_datetime;
         private $event_desc;
-        private $participants;
         private $capacity;
 
 
         public function __construct($event_id, $username, $title, $start_point, $end_point, 
-        $event_datetime, $event_desc, $participants, $capacity){
+        $event_datetime, $event_desc, $capacity){
             $this->event_id = $event_id;
             $this->username = $username;
             $this->title = $title;
@@ -23,7 +19,6 @@
             $this->end_point = $end_point;
             $this->event_datetime = $event_datetime;
             $this->event_desc = $event_desc;
-            $this->participants = $participants;
             $this->capacity = $capacity;
         }
 
@@ -53,10 +48,6 @@
 
         public function getEventDesc() {
             return $this->event_desc;
-        }
-
-        public function getParticipants() {
-            return $this->participants;
         }
 
         public function getCapacity() {

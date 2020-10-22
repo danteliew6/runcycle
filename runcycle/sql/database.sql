@@ -35,24 +35,23 @@ CREATE TABLE event (
   end_point varchar(30) NOT NULL,
   event_datetime TIMESTAMP NOT NULL,
   event_desc varchar(100) NOT NULL,
-  participants int(11) NOT NULL,
   capacity int(11) NOT NULL,
   CONSTRAINT event_pk PRIMARY KEY (event_id),
   CONSTRAINT event_fk FOREIGN KEY (username) references user(username)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8; 
 
 --
--- Table structure for table "capacity"
+-- Table structure for table "participants"
 --
 
--- DROP TABLE IF EXISTS capacity;
--- CREATE TABLE capacity (
---   event_id int(11) NOT NULL,
---   username int(11) NOT NULL,
---   CONSTRAINT capacity_pk PRIMARY KEY (event_id, username),
---   CONSTRAINT capacity_fk1 FOREIGN KEY (event_id) references event(event_id),
---   CONSTRAINT capacity_fk2 FOREIGN KEY (username) references user(username)
--- ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+DROP TABLE IF EXISTS participants;
+CREATE TABLE participants (
+  event_id int(11) NOT NULL,
+  username varchar(30) NOT NULL,
+  CONSTRAINT capacity_pk PRIMARY KEY (event_id, username),
+  CONSTRAINT capacity_fk1 FOREIGN KEY (event_id) references event(event_id),
+  CONSTRAINT capacity_fk2 FOREIGN KEY (username) references user(username)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 
 
 --

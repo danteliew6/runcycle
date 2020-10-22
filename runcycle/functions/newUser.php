@@ -5,10 +5,10 @@
 
     if (isset($_POST['username']) && isset($_POST['email']) && $_POST['password'] == $_POST['confirm_password']) {
         $isAddOk = $dao -> newUser($_POST['username'], $_POST['password'], $_POST['email']);
-        header("Location: ../login.html");
+        header("Location: ../sample_login.html");
         exit();
     }
 
-    header("Location: ../register.html?error=true");
+    header("Location: ../sample_register.html?error=true");
  
 ?>
