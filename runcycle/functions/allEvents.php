@@ -9,7 +9,6 @@ include_once 'common.php';
 $conn = new ConnectionManager();
 $pdo = $conn->getConnection();
 
-$sql = "SELECT * from event order by event_datetime desc";
 
 $stmt = $pdo->prepare($sql);
 $isOk = $stmt->execute();
