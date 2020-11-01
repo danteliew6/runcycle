@@ -13,6 +13,7 @@ $conn = new ConnectionManager();
 
 $dao = new ParticipantsDAO();
 $data = $dao -> getParticipants($_GET['event_id']);
+
 // check if more than 0 record found
 if(isset($data)) {
 

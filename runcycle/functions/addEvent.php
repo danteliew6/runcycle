@@ -8,7 +8,7 @@
      $_GET['event_datetime'], $_GET['event_desc'], $_GET['capacity'], $_GET['activity'], $_GET['duration'], $_GET['distance']);
     
     if ($isAddOk){
-        header("Location: ../event.html");
+        header("Location: ../home.html");
         exit();
     }
     else {
