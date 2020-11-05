@@ -1,8 +1,4 @@
-
-
-
 window.addEventListener('load', getAllEvents);
-
 
 
 
@@ -44,7 +40,7 @@ function getAllEvents() {
                     </div>
                     <div class="card-footer text-center p-4">
                       <a href="event.html?event_id=${events.event_id}" class="btn btn-dark mr-2">Details</a>
-                      <button type = "button" class="btn btn-success" id = "event${events.event_id}" onclick = "updateJoin(${events.event_id})">Join Event</a>
+                      <button type = "button" class="btn btn-success" id = "event${events.event_id}" onclick = "checkHost(${events.event_id})">Join Event</a>
                     </div>
                     </div>
                 </div>`;
@@ -78,62 +74,84 @@ function checkJoined(event_id) {
 }
 
 
-
-function updateJoin(event_id) {
-    // console.log(event_id);
-    eventToUpdate = document.getElementById(`event${event_id}`);
-    checkHost(event_id);
-
-    if (eventToUpdate.getAttribute('class') == "btn btn-success") {
-        const url = `functions/joinEvent.php?event_id=${event_id}`;
-        const request = new XMLHttpRequest();
+function checkHost(event_id) {
+    const url = `functions/checkHost.php?event_id=${event_id}`;
+    const request = new XMLHttpRequest();
     
+    var triggered = 0
     
-        request.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                alert('Event joined succesfully! Have a good workout!')
-                eventToUpdate.setAttribute('class', "btn btn-danger");
-                eventToUpdate.innerHTML = "Cancel";         
-            }
+    request.onreadystatechange = function() {
+        console.log(triggered);
+        if (triggered < 1 && this.readyState == 4 && this.status == 200) {           
+            triggered++;     
+            return cancelEvent(true, event_id);
+            // request.abort();
         }
-        request.open("GET", `${url}`, true);
-        request.send();
+        else if (triggered < 1 && this.readyState == 4 && this.status == 404) {
+            triggered++
+            return cancelEvent(false, event_id);
+            // request.abort();
+        }
+        
     }
-    else {
+
+ 
+    request.open('GET', `${url}`, true);
+    request.send();
+    
+}
+
+
+function cancelEvent(isHost, event_id) {
+    eventToUpdate = document.getElementById(`event${event_id}`); 
+    if (isHost) {
+        if (confirm('You are the host. Are you sure you want to cancel this event?')) {
+            // eventToUpdate = document.getElementById(`event${event_id}`);
+            const url = `functions/cancelEvent.php?event_id=${event_id}`;
+            const request = new XMLHttpRequest();
+            request.open("GET", `${url}`, true);
+            request.send();
+
+            alert('Event removed!');
+            eventToUpdate.setAttribute('class', "btn btn-success");
+            eventToUpdate.innerHTML = "Join Event"; 
+            console.log('Event removed');
+            location.reload(); 
+        }
+    }
+    else if (eventToUpdate.innerHTML == "Cancel") {
         const url = `functions/removeParticipant.php?event_id=${event_id}`;
         const request = new XMLHttpRequest();
     
     
         request.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                alert('Event removed!');
                 eventToUpdate.setAttribute('class', "btn btn-success");
-                eventToUpdate.innerHTML = "Join Event";         
+                eventToUpdate.innerHTML = "Join Event"; 
+                alert('Event removed!');
+                // location.reload();        
             }
         }
         request.open("GET", `${url}`, true);
         request.send();
-
     }
-
-    }
-
-
-    function checkHost(event_id) {
-        const url = `functions/getEvent.php?event_id=${event_id}`;
+    else {
+        const url = `functions/joinEvent.php?event_id=${event_id}`;
         const request = new XMLHttpRequest();
-
+    
+    
         request.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                const data = JSON.parse(this.responseText);
-                // console.log(data.records[0].username);
-
-                let username = data.records[0].username;
-
-                
+                eventToUpdate.setAttribute('class', "btn btn-danger");
+                eventToUpdate.innerHTML = "Cancel";
+                alert('Event joined succesfully! Have a good workout!');
+                // location.reload();        
             }
         }
         request.open("GET", `${url}`, true);
         request.send();
     }
+
+}
+
   

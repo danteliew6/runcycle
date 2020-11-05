@@ -48,8 +48,8 @@ function calcRoute(directionsService, directionsRenderer) {
         document.getElementById('origin').value = result.routes[0].legs[0]['start_address'];
         document.getElementById('destination').value = result.routes[0].legs[0]['end_address'];
         
-        console.log(result.routes[0].legs[0]['start_address']); //how to get start point
-        console.log(result.routes[0].legs[0]['end_address']); //how to get end point
+        // console.log(result.routes[0].legs[0]['start_address']); //how to get start point
+        // console.log(result.routes[0].legs[0]['end_address']); //how to get end point
       }
       else {
           document.getElementById('map').innerHTML = 'No routes were found, please enter a postal code or more specific address.';
@@ -65,5 +65,6 @@ function computeTotalDistance(result) {
         total += myroute.legs[i].distance.value;
     }
     total = total / 1000;
+    // console.log(total);
     document.getElementById("total").value = total;
 }

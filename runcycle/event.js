@@ -141,10 +141,11 @@ function calcRoute(directionsService, directionsRenderer) {
 function computeTotalDistance(result) {
     let total = 0;
     const myroute = result.routes[0];
-
+    console.log(total);
     for (let i = 0; i < myroute.legs.length; i++) {
         total += myroute.legs[i].distance.value;
     }
     total = total / 1000;
-    //document.getElementById("total").innerHTML = total + " km";
+    document.getElementById("total").value = total;
+    
 }
