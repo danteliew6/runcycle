@@ -31,8 +31,8 @@
 
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top mb-5">
-        <div class="container ">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
             <a href='home.html'><img src="runcyclewhite.png" height="70" width="auto"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,10 +49,7 @@
                         <a class="nav-link" href="meettheteam.html">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="functions/logOut.php">Log Out</a>
                     </li>
                 </ul>
             </div>
@@ -61,14 +58,14 @@
     <br><br>
 
 
-    <div class = "container mt-5">
-        <table class="table table-striped" >
+    <div class="container mt-5">
+        <table class="table table-striped">
             <thead>
                 <tr>
-                  <th scope="col">Event Details</th>
+                    <th scope="col">Event Details</th>
                 </tr>
             </thead>
-            <tbody id = "eventDetails"></tbody>
+            <tbody id="eventDetails"></tbody>
 
         </table>
     </div>
@@ -77,7 +74,7 @@
     <div class="container mt-5">
         <!-- map modal -->
         <!-- Button trigger modal -->
-        <button type="button" id = "showMap" class="btn btn-primary" data-toggle="modal" data-target="#mapModal">
+        <button type="button" id="showMap" class="btn btn-primary" data-toggle="modal" data-target="#mapModal">
             Show Map
         </button>
 
@@ -105,13 +102,14 @@
 
         <!-- participants modal -->
         <!-- Button trigger modal -->
-        <button type="button" id = "showParticipants" class="btn btn-primary" data-toggle="modal" data-target="#participantsList">
+        <button type="button" id="showParticipants" class="btn btn-primary" data-toggle="modal"
+            data-target="#participantsList">
             Participants
         </button>
 
         <!-- Modal -->
-        <div class="modal fade" id="participantsList" tabindex="-1" role="dialog" aria-labelledby="participantsListLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="participantsList" tabindex="-1" role="dialog"
+            aria-labelledby="participantsListLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -121,7 +119,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <table class="table table-striped border-dark" >
+                        <table class="table table-striped border-dark">
                             <tbody id="participants"></tbody>
                         </table>
                     </div>

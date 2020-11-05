@@ -4,6 +4,8 @@
 window.addEventListener('load', getAllEvents);
 
 
+
+
 function getAllEvents() {
     const url = "functions/allEvents.php";
     const request = new XMLHttpRequest();
@@ -11,14 +13,23 @@ function getAllEvents() {
     request.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             const data = JSON.parse(this.responseText);
+            let upcomingEvents = document.getElementById('upcomingEvents');
+            upcomingEvents.innerHTML = "";
 
             for (events of data.records) {
-                let upcomingEvents = document.getElementById('upcomingEvents');
-                upcomingEvents.innerHTML = "";
+                if (events.activity == "Run") {
+                    var image = "run.png";
+                }
+                else{
+                    var image = "cycle.png";
+                }
+
+
+                // console.log(events);
                 upcomingEvents.innerHTML += 
-                ` <div class="col-lg-3 col-md-6 mb-4">
+                ` <div class="col-lg-3 col-md-6 m-4">
                     <div class="card h-100 border-1 shadow" style="width: 18rem;">
-                      <img class="card-img-top" src="runcyclewhite.png" style = "background-color:grey;" alt="Image cannot be displayed">
+                      <img class="card-img-top" src="${image}" style = "background-color:grey;" alt="Image cannot be displayed">
                     <div class="card-body text-left">
                       <h4 class="card-title">${events.title}</h4> 
                       <p class="card-text">
@@ -37,6 +48,8 @@ function getAllEvents() {
                     </div>
                     </div>
                 </div>`;
+
+                checkJoined(events.event_id);
             }
         }
     }
@@ -44,11 +57,32 @@ function getAllEvents() {
     request.send();
 }
 
+// check if the user is currently a participant in an event
+function checkJoined(event_id) {
+    const url = `functions/checkJoined.php?event_id=${event_id}`;
+    const request = new XMLHttpRequest();
+    var data;
+    request.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            data = JSON.parse(this.responseText);
+            // console.log(data);
+            let eventToUpdate = document.getElementById(`event${event_id}`);
+            eventToUpdate.setAttribute('class', 'btn btn-danger');
+            eventToUpdate.innerHTML = "Cancel";
+
+        }
+    }
+    request.open('GET', `${url}`, true);
+    request.send();
+
+}
+
+
 
 function updateJoin(event_id) {
     // console.log(event_id);
     eventToUpdate = document.getElementById(`event${event_id}`);
-    
+    checkHost(event_id);
 
     if (eventToUpdate.getAttribute('class') == "btn btn-success") {
         const url = `functions/joinEvent.php?event_id=${event_id}`;
@@ -59,7 +93,7 @@ function updateJoin(event_id) {
             if (this.readyState == 4 && this.status == 200) {
                 alert('Event joined succesfully! Have a good workout!')
                 eventToUpdate.setAttribute('class', "btn btn-danger");
-                eventToUpdate.innerHTML = "Cancel Event";         
+                eventToUpdate.innerHTML = "Cancel";         
             }
         }
         request.open("GET", `${url}`, true);
@@ -82,5 +116,24 @@ function updateJoin(event_id) {
 
     }
 
+    }
+
+
+    function checkHost(event_id) {
+        const url = `functions/getEvent.php?event_id=${event_id}`;
+        const request = new XMLHttpRequest();
+
+        request.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                const data = JSON.parse(this.responseText);
+                // console.log(data.records[0].username);
+
+                let username = data.records[0].username;
+
+                
+            }
+        }
+        request.open("GET", `${url}`, true);
+        request.send();
     }
   
