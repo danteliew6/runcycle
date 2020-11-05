@@ -35,7 +35,7 @@ function getAllEvents() {
                       
                       <span><b>Details:</b></span><br>
                       <p>${events.event_datetime}<br>Duration: ${events.duration} hours
-                          <br>Capacity: (num_participants)/${events.capacity}</p> 
+                          <br>Capacity: ${events.participants}/${events.capacity}</p> 
                           <br><b>Created by: ${events.username}</b>             
                     </div>
                     <div class="card-footer text-center p-4">

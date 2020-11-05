@@ -26,6 +26,8 @@ if($isOk) {
         // this will make $row['name'] to
         // just $name only
         extract($row);
+        $dao = new ParticipantsDAO();
+        $data = $dao -> getParticipants($event_id);
 
         $item = array(
             "event_id" => $event_id,
@@ -38,7 +40,8 @@ if($isOk) {
             "capacity" => $capacity,
             "activity" => $activity,
             "duration" => $duration,
-            "distance" => $distance
+            "distance" => $distance,
+            "participants" => sizeof($data)
         );
 
         array_push($result_arr["records"], $item);

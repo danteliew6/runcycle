@@ -14,6 +14,8 @@ if(isset($data)) {
     $result_arr = array();
     $result_arr["records"] = array();
 
+    $dao2 = new ParticipantsDAO();
+    $data2 = $dao2 -> getParticipants($_GET['event_id']);
 
     $item = array(
         "event_id" => $data->getEventId(),
@@ -26,7 +28,9 @@ if(isset($data)) {
         "capacity" => $data->getCapacity(),
         "activity" => $data->getActivity(),
         "duration" => $data->getDuration(),
-        "distance" => $data->getDistance());
+        "distance" => $data->getDistance(),
+        "participants" => sizeof($data2)
+    );
 
     array_push($result_arr["records"], $item);
     

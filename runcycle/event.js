@@ -41,7 +41,7 @@ function getEvent() {
             </tr>
             <tr>
                 <th scope="row">Capacity</th>
-                <td>NUM_PARTICIPANTS/${eventDetails.capacity}</td>
+                <td>${eventDetails.participants}/${eventDetails.capacity}</td>
             </tr>
             `;
             document.getElementById('showMap').addEventListener('click', getDirections);
