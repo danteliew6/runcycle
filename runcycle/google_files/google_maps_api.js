@@ -1,4 +1,8 @@
+document.getElementById('getDirections').addEventListener('click', getDirections);
+
 function getDirections() {
+    // console.log(this);
+    // console.log('hello');
     event.preventDefault();
     document.getElementById('map').innerHTML = "";
     document.getElementById('directionsPanel').innerHTML = "";
