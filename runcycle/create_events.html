@@ -69,10 +69,12 @@
                     <div class="col-6">
                         <label for = "#eventDateTime">Event Date and Time:</label> <br>
                         <input v-model="date" type="datetime-local" id="eventDateTime" name="event_datetime">
+                        <p class="text-danger" v-if="submitAttempt">{{dateError}}</p>
                     </div>
                     <div class = "col-6">
                         <label for="#duration">Duration:</label>                       
                         <input v-model="time" type="tel" min=1 max=24 name = "duration" maxlength="2" class="form-control" id="duration" placeholder="In hours, between 1-24">
+                        <p class="text-danger" v-if="submitAttempt">{{timeError}}</p>
                     </div>
                 </div>
 
@@ -81,6 +83,7 @@
                     <div class="col">
                         <label for="#capacity">Capacity:</label>  
                         <input v-model="capacity" type="number" min=1 max=5 name = "capacity"  class="form-control" id="capacity" placeholder="Maximum number of people for your event">
+                        <p class="text-danger" v-if="submitAttempt">{{capError}}</p>
                     </div>
                 </div>
 
@@ -109,12 +112,14 @@
                 <!--- Gmaps controler-->
                 <div class="form-row m-4">
                     <div class="col-6">
-                        <label v-model="origin" for="origin">Origin</label>
-                        <input type="text" class="form-control" name = "start_point" id="origin">
+                        <label for="origin">Origin</label>
+                        <input v-model="origin" type="text" class="form-control" name = "start_point" id="origin">
+                        <p class="text-danger" v-if="submitAttempt">{{originError}}</p>
                     </div>  
                     <div class="col-6">  
-                        <label v-model="destination" for="destination">Destination</label>
-                        <input type="text" class="form-control" name = "end_point" id="destination">
+                        <label for="destination">Destination</label>
+                        <input v-model="destination" type="text" class="form-control" name = "end_point" id="destination">
+                        <p class="text-danger" v-if="submitAttempt">{{desError}}</p>
                     </div>
                 </div>
                 
@@ -166,7 +171,7 @@
                 data:{
                 title:"",
                 date:"",
-                activity: "",
+                time: "",
                 capacity:"",
                 origin:"",
                 destination:"",
@@ -184,6 +189,31 @@
                 titleError: function(){
                 if(this.title.length === 0){
                 return "You have to give a title to the Event!"
+                    }
+                },
+                dateError: function(){
+                if(this.date.length === 0){
+                return "You have to give a Date to the Event!"
+                    }
+                },
+                timeError: function(){
+                if(this.time.length === 0){
+                return "You have to give a Durration to the Event!"
+                    }
+                },
+                capError: function(){
+                if(this.capacity.length === 0){
+                return "You have to limit the capacity of the Event!"
+                    }
+                },
+                originError: function(){
+                if(this.origin.length === 0){
+                return "Please input the starting location!"
+                    }
+                },
+                desError: function(){
+                if(this.destination.length === 0){
+                return "Please input the end location!"
                     }
                 }
             }
