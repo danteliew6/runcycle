@@ -4,8 +4,12 @@
   #backgroundDiv{
     background-image: url("tress.jpg");
   }
-</style>
 
+  body {
+    background-image: url("bg.png");
+  }
+
+</style>
 
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -16,11 +20,11 @@
     <!-- Mask & flexbox options-->
     <div class="mask rgba-black-light align-items-center">
    
-  <div class="container py-5">
+  <div class="container pt-5">
     <h1 class="font-weight-light" style="color: white; font-size: 5rem;">What is RunCycle?</h1>
   </div>
-  <div>
-      <p class="lead text-center px-5" style="color: white">
+  <div class="container col-xl-8">
+      <p class="lead text-center p-5" style="color: white">
           RunCycle is a Running and Cycling Event social website developed by a passionate group of runners and cyclers that love to code as well!
       </p>
   </div>
@@ -42,13 +46,13 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="home.html">Home
-              <span class="sr-only">(current)</span>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link" href="meettheteam.html">About</a>
+            <span class="sr-only">(current)</span>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="functions/logOut.php">Log Out</a>
@@ -61,6 +65,7 @@
 
   
   <!-- Page Content -->
+<body>
   <div class="container">
     <div class="row">
       <!-- Team Member 1 -->
@@ -117,4 +122,5 @@
     <!-- /.row -->
   
   </div>
+</body>
   <!-- /.container -->
