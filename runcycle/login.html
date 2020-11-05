@@ -4,6 +4,27 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script type="text/javascript"> 
+      var opacity = 0; 
+      var intervalID = 0; 
+      window.onload = fadeIn; 
+
+      function fadeIn() { 
+          setInterval(show, 50); 
+      } 
+
+      function show() { 
+          var body = document.getElementById("body"); 
+          opacity = Number(window.getComputedStyle(body) 
+                           .getPropertyValue("opacity")); 
+          if (opacity < 1) { 
+              opacity = opacity + 0.2; 
+              body.style.opacity = opacity 
+          } else { 
+              clearInterval(intervalID); 
+          } 
+      } 
+  </script> 
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -33,15 +54,22 @@
           font-size: 15px;
           font-weight: bold;
       }
+      body {
+        background-image: url('loginbg2.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-color: rgba(0,0,0,0.5);
+      }
+
 
     </style>
 
   </head>
   
-  <body>
+  <body id="body" style="opacity: 0;">
      <div class="container container-fluid col-6">
-        <img src="runcyclewhite.png" class='img-fluid mx-auto d-block border border-secondary' height='auto' width: 100%>
-        <p class= "text-center" style="color:white">Come and Run with us!</p>
+        <img src="runcyclewhite.png" class='img-fluid mx-auto d-block' height='auto' width: 100%>
+        <h3 class= "text-center" style="color:white">Come and Run with us!</h3>
     </div>
     <!--Don't change-->
    
@@ -64,7 +92,7 @@
     <!--Don't change-->
     <br>
     <div>
-        <p class="text-center">Do not have an account? <a href="register.html">Register Now!</a></p>
+        <p class="text-center" style="color: white">Do not have an account? <a href="register.html">Register Now!</a></p>
         
     </div>
 
