@@ -163,6 +163,12 @@
     
     
     <script>
+        var now = new Date().toISOString();
+        now = now.substr(0,16);
+        console.log(now);
+        document.getElementById("eventDateTime").setAttribute('min', now)
+        
+        
         var submit = document.getElementById('getDirections');
         submit.addEventListener("click", getDirections);
 
@@ -203,7 +209,7 @@
                 },
                 capError: function(){
                 if(this.capacity.length === 0){
-                return "You have to limit the capacity of the Event!"
+                    return "You have to limit the capacity of the Event!"
                     }
                 },
                 originError: function(){
