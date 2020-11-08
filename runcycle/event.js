@@ -52,8 +52,8 @@ function getEvent() {
     request.send();
 }
 
-function getDirections(origin, destination) {
 
+function getDirections(origin, destination) {
     document.getElementById('map').innerHTML = "";
     document.getElementById('directionsPanel').innerHTML = "";
 
@@ -63,11 +63,11 @@ function getDirections(origin, destination) {
         region: 'SG',
         travelMode: 'WALKING'
     };
+    const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    const url = "https://maps.googleapis.com/maps/api/js?key=AIzaSyB7cotLdg-POVfNJD7AqHuB4m2Wi-Styic&callback=initMap";
 
-    const url = "https://maps.googleapis.com/maps/api/js?";
     const request = new XMLHttpRequest();
-    const params = "key=AIzaSyB7cotLdg-POVfNJD7AqHuB4m2Wi-Styic&callback=initMap";
-    request.onreadystatechange = function () {
+    request.onreadystatechange = function() {
         if (request.readyState == 4 && request.status == 200) {
             initMap();
             map.setCenter(new google.maps.LatLng(1.3521, 103.8198));
@@ -75,9 +75,10 @@ function getDirections(origin, destination) {
         }
     }
 
-    request.open('GET', `${url}` + `${params}`, true);
+    request.open('GET', `${proxyurl}` + `${url}`, true);
     request.send();
 }
+
 
 function getParticipants(){
     let event_id = eventDetails.event_id;
@@ -99,6 +100,7 @@ function getParticipants(){
                     <td>${participants.username}</td>
                 </tr>
                 `; 
+                count++;
                 
             }
         }
@@ -131,21 +133,8 @@ function calcRoute(directionsService, directionsRenderer) {
         if (status == 'OK') {
             directionsRenderer.setDirections(result);
 
-            computeTotalDistance(result);
         } else {
             document.getElementById('map').innerHTML = 'No routes were found, please enter a postal code or more specific address.';
         }
     });
-}
-
-function computeTotalDistance(result) {
-    let total = 0;
-    const myroute = result.routes[0];
-    console.log(total);
-    for (let i = 0; i < myroute.legs.length; i++) {
-        total += myroute.legs[i].distance.value;
-    }
-    total = total / 1000;
-    document.getElementById("total").value = total;
-    
 }

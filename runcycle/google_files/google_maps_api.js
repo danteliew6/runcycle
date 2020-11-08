@@ -1,3 +1,6 @@
+
+
+
 document.getElementById('getDirections').addEventListener('click', getDirections);
 
 function getDirections() {
@@ -13,17 +16,17 @@ function getDirections() {
         region: 'SG',
         travelMode: 'WALKING'
     };
+    const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    const url = "https://maps.googleapis.com/maps/api/js?key=AIzaSyB7cotLdg-POVfNJD7AqHuB4m2Wi-Styic&callback=initMap";
 
-    const url = "https://maps.googleapis.com/maps/api/js?";
     const request = new XMLHttpRequest();
-    const params = "key=AIzaSyB7cotLdg-POVfNJD7AqHuB4m2Wi-Styic&callback=initMap";
     request.onreadystatechange = function() {
         if (request.readyState == 4 && request.status == 200) {
             initMap();
         }
     }
 
-    request.open('GET', `${url}` + `${params}`, true);
+    request.open('GET', `${proxyurl}` + `${url}`, true);
     request.send();
 }
 
