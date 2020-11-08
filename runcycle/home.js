@@ -152,7 +152,7 @@ function getWeather(){
                 var tbody = document.getElementById("tbody");
                 var obj = JSON.parse(this.responseText);   
                 var len = obj.items.length;
-               
+                var weatherDays = ['Today', '2 Days', '4 Days']
                     for(i = 0  ; i < len ; i++ ){   
                         let output = "";
                         //Forecasts holds the important data
@@ -162,13 +162,13 @@ function getWeather(){
                         var humidity = forecast.relative_humidity;
                                             
                         output+= 
-                            `<tr><th> 
+                            `<tr><th>${weatherDays[i]}</th>
                                 <td>${text}</td>  
                                 <td>${temp.low}</td>
                                 <td>${temp.high}</td>
                                 <td>${humidity.low}</td>
                                 <td>${humidity.high}</td>
-                            </th></tr>`
+                            </tr>`
                         
                         tbody.innerHTML += output;
                     }             
