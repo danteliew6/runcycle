@@ -26,6 +26,7 @@ $pdo = null;
 $result_arr = array();
 $result_arr["records"] = array();
 $dao = new EventDAO();
+
 foreach ($result as $participants) {
     $data = $dao -> getEvent($participants->getEventId());
     // check if more than 0 record found
@@ -33,7 +34,15 @@ foreach ($result as $participants) {
         $event_datetime = $data->getEventDateTime();
         $event_datetime = strtotime($event_datetime);
         $now = getdate();
-        if ($event_datetime >= $now[0]) {
+        
+        if ($_GET['is_upcoming']) {
+            $isValid = $event_datetime >= $now[0];
+        }
+        else {
+            $isValid = $event_datetime < $now[0];
+        }
+
+        if ($isValid) {
         // products array    
         $dao2 = new ParticipantsDAO();
         $data2 = $dao2 -> getParticipants($participants->getEventId());
