@@ -11,8 +11,8 @@ function getAllEvents() {
             // console.log(this.responseText);
             const data = JSON.parse(this.responseText);
             console.log(data);
-            let myEvents = document.getElementById('myEvents');
-            myEvents.innerHTML = "";
+            let upcomingEvents = document.getElementById('upcomingEvents');
+            upcomingEvents.innerHTML = "";
 
             for (events of data.records) {
                 if (events.activity == "Run") {
@@ -34,7 +34,7 @@ function getAllEvents() {
                 }
 
                 // console.log(events);
-                myEvents.innerHTML += 
+                upcomingEvents.innerHTML += 
                 ` <div class="col-lg-3 col-md-6 m-4">
                     <div class="card h-100 border-1 shadow" style="width: 18rem;">
                       <img class="card-img-top" src="${image}" style = "background-color:grey;" alt="Image cannot be displayed">
