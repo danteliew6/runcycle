@@ -178,7 +178,7 @@ function cancelEvent(isHost, event_id) {
 
 
 function getEventsHistory() {
-    const url = "functions/getMyEvents.php?is_upcoming=false";
+    const url = "functions/getMyEvents.php";
     const request = new XMLHttpRequest();
 
     request.onreadystatechange = function() {

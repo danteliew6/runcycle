@@ -35,7 +35,7 @@ foreach ($result as $participants) {
         $event_datetime = strtotime($event_datetime);
         $now = getdate();
         
-        if ($_GET['is_upcoming']) {
+        if (isset($_GET['is_upcoming'])) {
             $isValid = $event_datetime >= $now[0];
         }
         else {
