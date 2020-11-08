@@ -13,18 +13,7 @@
 
 
 <script src = "home.js"></script>
-
-
-<style>
-  body {
-  background-image: url("bg.png");
-}
-
-
-</style>
-
 </head>
-
 
 <body>
 
@@ -71,6 +60,40 @@
       <a href="create_events.html" class="btn btn-outline-dark">Create New Event</a>
     </div>
 
+    <!-- Weather API-->
+  <div class='container mt-5 mb-5"'>
+    <div class="row">
+      <div class="col">
+          <h2>Weather for the next 4-days</h2>
+
+          <table class='table table-bordered table-striped text-center'>
+              <thead>
+                  <tr>
+                      <th scope="col" rowspan='2'>Date</th>
+                      <th scope="col" rowspan='2'>Forecast</th>
+                      <th scope="col" colspan='2'>Temperature °C</th>
+                      <th scope="col" colspan='2'>Humid</th>
+                  </tr>
+                  <tr>
+                      <td>Low</td>
+                      <td>High</td>
+                      <td>Low</td>
+                      <td>High</td>
+                  </tr>
+              </thead>
+              
+              <tbody id='tbody'></tbody>
+          </table>
+
+        </div> 
+    </div>
+  </div>
+
+    <!-- Page Features -->
+    <div class="mt-5 mb-5">
+        <h1>My Events</h1>
+    </div>
+
     
     <!-- /.row -->
     <div class="mt-5 mb-5">
@@ -91,11 +114,19 @@
     <!-- /.container -->
   </footer>
 
+
+  <script>
+    //Get the weather throught the API
+    getWeather();
+  </script>
+
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   
   <!-- javascript functions for home page -->
+
+
 
 
 </body>
