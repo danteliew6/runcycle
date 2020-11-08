@@ -1,7 +1,7 @@
 <?php
 // required headers
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8");
+// header("Access-Control-Allow-Origin: *");
+// header("Content-Type: application/json; charset=UTF-8");
 
 // include database and object files
 include_once 'common.php';
@@ -19,32 +19,39 @@ if($isOk) {
 
     // products array
     $result_arr = array();
-    $result_arr["records"] = array();
-
+    $result_arr["records"] = array();          
+    
     while( $row = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+       
         // extract row
         // this will make $row['name'] to
         // just $name only
-        extract($row);
-        $dao = new ParticipantsDAO();
-        $data = $dao -> getParticipants($event_id);
-
-        $item = array(
-            "event_id" => $event_id,
-            "username" => $username,
-            "title" => $title,
-            "start_point" => $start_point,
-            "end_point" => $end_point,
-            "event_datetime" => $event_datetime,
-            "event_desc" => $event_desc,
-            "capacity" => $capacity,
-            "activity" => $activity,
-            "duration" => $duration,
-            "distance" => $distance,
-            "participants" => sizeof($data)
-        );
-
-        array_push($result_arr["records"], $item);
+        extract($row); 
+        $datetime = strtotime($event_datetime);
+        $now = getdate();
+        // var_dump($now);
+        // var_dump($datetime);
+        if ($datetime >= $now[0]) {
+            $dao = new ParticipantsDAO();
+            $data = $dao -> getParticipants($event_id);
+    
+            $item = array(
+                "event_id" => $event_id,
+                "username" => $username,
+                "title" => $title,
+                "start_point" => $start_point,
+                "end_point" => $end_point,
+                "event_datetime" => $event_datetime,
+                "event_desc" => $event_desc,
+                "capacity" => $capacity,
+                "activity" => $activity,
+                "duration" => $duration,
+                "distance" => $distance,
+                "participants" => sizeof($data)
+            );
+    
+            array_push($result_arr["records"], $item);
+        }
     }
 
     // Add info node (1 per response)
