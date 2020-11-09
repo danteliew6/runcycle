@@ -86,6 +86,11 @@
             </div>
             <button type="submit" class="btn btn-primary mx-auto d-block">Login</button>
         </form>
+        <!-- error message -->
+        <div class="alert alert-danger mt-4" style = 'font-size: 1.25rem;' role="alert" id = 'errorMessage'>
+        You have entered either an invalid username or invalid password.
+        </div>
+        <!-- End of error message -->
         
   
   </div>
@@ -97,6 +102,33 @@
     </div>
 
     <!-- Optional JavaScript -->
+    <script>
+    window.addEventListener('load', checkError);
+
+    function findGetParameter(parameterName) {
+        var result = null,
+            tmp = [];
+        location.search
+            .substr(1)
+            .split("&")
+            .forEach(function (item) {
+              tmp = item.split("=");
+              if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+            });
+        return result;
+    }
+    
+    function checkError() {
+        const returnError = findGetParameter('error');
+        if (returnError != null) {
+            let errorMessage = document.getElementById('errorMessage');
+            errorMessage.style.display = "block";
+        }
+        else {
+            document.getElementById('errorMessage').style.display = "none";
+        }
+    }
+    </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

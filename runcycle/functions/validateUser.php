@@ -19,7 +19,7 @@
     else {
         echo "<script type='text/javascript'>
         alert('$message');
-        window.location.href='../login.html';
+        window.location.href='../login.html?error=true';
         </script>";
        
     }
