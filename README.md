@@ -51,21 +51,31 @@ Finding events:
 # Page Details
 
 Registration
+
 This page is where users will register for an account in order to login to the RunCycle website.
 
 Login
+
 This page is where users key in their login details and login to the RunCycle website.
 
 Home
+
 The RunCycle homepage is the default page that users will be directed to once they log into their account. It shows all the upcoming events that are available for them to participate in via Cards on the screen, as well as the events the user has signed up for.
 
-Weather - At the top of the page, a Weather Data API is implemented to show the users the current weather. This is to facilitate in the planning of events and to monitor what the current weather is like. It is especially useful for our website due to the outdoor activity nature.
+Weather
 
-Cards - The cards will show a summarised description of the Event title, as well as buttons to quickly Join/Exit the event.
+At the top of the page, a Weather Data API is implemented to show the users the current weather. This is to facilitate in the planning of events and to monitor what the current weather is like. It is especially useful for our website due to the outdoor activity nature.
 
-My Events - This section will show all the events that the user has signed up for
+Cards
+
+The cards will show a summarised description of the Event title, as well as buttons to quickly Join/Exit the event.
+
+My Events
+
+This section will show all the events that the user has signed up for
 
 Event Detail Page
+
 This page shows the various details of the specific event that has been selected. Users are able to view what the event is about, who are the participants of the event, what is the activity route, access comments for the event as well as to join the event.
 
 Details include:
