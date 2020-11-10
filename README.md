@@ -58,11 +58,11 @@ Login
 
 Home
 
-	The RunCycle homepage is the default page that users will be directed to once they log into their account. It shows all the upcoming events that are available for them 	to participate in via Cards on the screen, as well as the events the user has signed up for.
+	The RunCycle homepage is the default page that users will be directed to once they log into their account. It shows all the upcoming events that are available for them to participate in via Cards on the screen, as well as the events the user has signed up for.
 
 Weather
 
-	At the top of the page, a Weather Data API is implemented to show the users the current weather. This is to facilitate in the planning of events and to monitor what the 	current weather is like. It is especially useful for our website due to the outdoor activity nature.
+	At the top of the page, a Weather Data API is implemented to show the users the current weather. This is to facilitate in the planning of events and to monitor what the current weather is like. It is especially useful for our website due to the outdoor activity nature.
 
 Cards
 
@@ -74,17 +74,16 @@ My Events
 
 Event Detail Page
 
-	This page shows the various details of the specific event that has been selected. Users are able to view what the event is about, who are the participants of the event, 	what is the activity route, access comments for the event as well as to join the event.
-
-Details include:
-	Event Title
-	Event Type (Run/Cycle)
-	Date
-	Time
-	Duration
-	No. of Participants
-	Description of event
-	Activity Route (Google Maps API)
+	This page shows the various details of the specific event that has been selected. Users are able to view what the event is about, who are the participants of the event, what is the activity route, access comments for the event as well as to join the event.
+	Details include:
+		Event Title
+		Event Type (Run/Cycle)
+		Date
+		Time
+		Duration
+		No. of Participants
+		Description of event
+		Activity Route (Google Maps API)
 
 
 Join/Cancel:
@@ -94,15 +93,14 @@ Join/Cancel:
 
 Create Event
 	Users will access the Create Events page via the Navigation Bar on the top right hand corner of the webpage.
-
 	User will key in their event details based on the form given
-	Event Title
-	Event Type (Run/Cycle)
-	Date
-	Time
-	Duration
-	No. of Participants allowed
-	Description of event
+		Event Title
+		Event Type (Run/Cycle)
+		Date
+		Time
+		Duration
+		No. of Participants allowed
+		Description of event
 	User will then generate the desired activity route using the Google Maps API by keying in their Start and End location
 	Users will then click on the create event button and the event will be submitted into the database and can be viewed and accessed via the Homepage.
 
