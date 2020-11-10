@@ -74,16 +74,16 @@ My Events
 
 Event Detail Page
 
-	This page shows the various details of the specific event that has been selected. Users are able to view what the event is about, who are the participants of the event, what is the activity route, access comments for the event as well as to join the event.
-	Details include:
-		Event Title
-		Event Type (Run/Cycle)
-		Date
-		Time
-		Duration
-		No. of Participants
-		Description of event
-		Activity Route (Google Maps API)
+This page shows the various details of the specific event that has been selected. Users are able to view what the event is about, who are the participants of the event, what is the activity route, access comments for the event as well as to join the event.
+Details include:
+	Event Title
+	Event Type (Run/Cycle)
+	Date
+	Time
+	Duration
+	No. of Participants
+	Description of event
+	Activity Route (Google Maps API)
 
 
 Join/Cancel:
