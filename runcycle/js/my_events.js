@@ -17,10 +17,10 @@ function getMyEvents() {
 
             for (events of data.records) {
                 if (events.activity == "Run") {
-                    var image = "run.png";
+                    var image = "img/run.png";
                 }
                 else{
-                    var image = "cycle.png";
+                    var image = "img/cycle.png";
                 }
 
                 if (events.participants >= events.capacity) {
@@ -191,10 +191,10 @@ function getEventsHistory() {
 
             for (events of data.records) {
                 if (events.activity == "Run") {
-                    var image = "run.png";
+                    var image = "img/run.png";
                 }
                 else{
-                    var image = "cycle.png";
+                    var image = "img/cycle.png";
                 }
                 eventsHistory.innerHTML += 
                 ` <div class="col-lg-3 col-md-6 m-4">

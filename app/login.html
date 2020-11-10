@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script type="text/javascript"> 
+      var opacity = 0; 
+      var intervalID = 0; 
+      window.onload = fadeIn; 
+
+      function fadeIn() { 
+          setInterval(show, 50); 
+      } 
+
+      function show() { 
+          var body = document.getElementById("body"); 
+          opacity = Number(window.getComputedStyle(body) 
+                           .getPropertyValue("opacity")); 
+          if (opacity < 1) { 
+              opacity = opacity + 0.2; 
+              body.style.opacity = opacity 
+          } else { 
+              clearInterval(intervalID); 
+          } 
+      } 
+  </script> 
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <style>
+        body {
+        background-color:grey;
+        }
+       
+      .login-form {
+      width: 340px;
+        margin: 50px auto;
+      }
+      .login-form form {
+        margin-bottom: 15px;
+          background: #f7f7f7;
+          box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+          padding: 30px;
+      }
+      .login-form h2 {
+          margin: 0 0 15px;
+      }
+      .form-control, .btn {
+          min-height: 38px;
+          border-radius: 2px;
+      }
+      .btn {        
+          font-size: 15px;
+          font-weight: bold;
+      }
+      body {
+        background-image: url('loginbg2.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-color: rgba(0,0,0,0.5);
+      }
+
+
+    </style>
+
+  </head>
+  
+  <body id="body" style="opacity: 0;">
+     <div class="container container-fluid col-6">
+        <img src="img/runcyclewhite.png" class='img-fluid mx-auto d-block' height='auto' width: 100%>
+        <h3 class= "text-center" style="color:white">Come and Run with us!</h3>
+    </div>
+    <!--Don't change-->
+   
+<!--<div class="container border border-secondary col-6">-->
+  <div class="login-form">
+        <form action = "functions/validateUser.php" method = "POST">
+            <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" name = "username" size = "20" class="form-control" id="username" placeholder="Max 20 characters">
+            </div>
+            <div class="form-group">
+            <label for="pwd">Password</label>
+            <input type="password" name = "password" class="form-control" id="password">
+            </div>
+            <button type="submit" class="btn btn-primary mx-auto d-block">Login</button>
+        </form>
+        <!-- error message -->
+        <div class="alert alert-danger mt-4" style = 'font-size: 1.25rem;' role="alert" id = 'errorMessage'>
+        You have entered either an invalid username or invalid password.
+        </div>
+        <!-- End of error message -->
+        
+  
+  </div>
+    <!--Don't change-->
+    <br>
+    <div>
+        <p class="text-center" style="color: white">Do not have an account? <a href="register.html">Register Now!</a></p>
+        
+    </div>
+
+    <!-- Optional JavaScript -->
+    <script>
+    window.addEventListener('load', checkError);
+
+    function findGetParameter(parameterName) {
+        var result = null,
+            tmp = [];
+        location.search
+            .substr(1)
+            .split("&")
+            .forEach(function (item) {
+              tmp = item.split("=");
+              if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+            });
+        return result;
+    }
+    
+    function checkError() {
+        const returnError = findGetParameter('error');
+        if (returnError != null) {
+            let errorMessage = document.getElementById('errorMessage');
+            errorMessage.style.display = "block";
+        }
+        else {
+            document.getElementById('errorMessage').style.display = "none";
+        }
+    }
+    </script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+  <!--hello-->
+</html>

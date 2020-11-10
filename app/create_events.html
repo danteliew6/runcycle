@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+</head>
+<style>
+    #map {
+        height: 100%;
+        width: 100%;
+    }
+
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+</style>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a href='home.html'><img src="img/runcyclewhite.png" height="70" width="auto"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.html">Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="my_events.html">My Events
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="meettheteam.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="functions/logOut.php">Log Out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Event Form -->
+    <div id='app' class="container" style="margin-top: 100px;">
+        <div class="event-form">
+            <form action="functions/addEvent.php" method="GET">
+
+                <!-- title -->
+                <div class="form-row m-4">
+                    <div class="col">
+                        <label for="#title">Title:</label>
+                        <input v-model="title" type="text" name="title" size="30" class="form-control" id="title"
+                            placeholder="Give a Name to Your Event">
+                        <p class="text-danger" v-if="submitAttempt">{{titleError}}</p>
+                    </div>
+                </div>
+
+                <!-- yymmdd -->
+                <div class="form-row m-4">
+                    <div class="col-6">
+                        <label for="#eventDateTime">Event Date and Time:</label> <br>
+                        <input v-model="date" type="datetime-local" id="eventDateTime" name="event_datetime">
+                        <p class="text-danger" v-if="submitAttempt">{{dateError}}</p>
+                    </div>
+                    <div class="col-6">
+                        <label for="#duration">Duration:</label>
+                        <input v-model="time" type="tel" min=1 max=24 name="duration" maxlength="2" class="form-control"
+                            id="duration" placeholder="In hours, between 1-24">
+                        <p class="text-danger" v-if="submitAttempt">{{timeError}}</p>
+                    </div>
+                </div>
+
+                <!-- Capacity -->
+                <div class="form-row m-4">
+                    <div class="col">
+                        <label for="#capacity">Capacity:</label>
+                        <input v-model="capacity" type="number" min=1 max=5 name="capacity" class="form-control"
+                            id="capacity" placeholder="Maximum number of people for your event">
+                        <p class="text-danger" v-if="submitAttempt">{{capError}}</p>
+                    </div>
+                </div>
+
+                <!-- Activity -->
+                <div class="form-row m-4">
+                    <div class="form-group">
+                        <label for="activity">Activity:</label>
+                        <select class="form-control" id="activity" name="activity">
+                            <option>Run</option>
+                            <option>Cycle</option>
+                        </select>
+                    </div>
+                </div>
+
+
+
+                <!-- Description -->
+                <div class="form-row m-4">
+                    <div class="col">
+                        <label for="#description">Description</label>
+                        <textarea maxlength="200" name="event_desc" class="form-control" id="description" rows="3"
+                            placeholder="Give me Something Exciting in Less than 200 words!"></textarea>
+                    </div>
+                </div>
+
+
+                <!--- Gmaps controler-->
+                <div class="form-row m-4">
+                    <div class="col-6">
+                        <label for="origin">Origin</label>
+                        <input v-model="origin" type="text" class="form-control" name="start_point" id="origin">
+                        <p class="text-danger" v-if="submitAttempt">{{originError}}</p>
+                    </div>
+                    <div class="col-6">
+                        <label for="destination">Destination</label>
+                        <input v-model="destination" type="text" class="form-control" name="end_point" id="destination">
+                        <p class="text-danger" v-if="submitAttempt">{{desError}}</p>
+                    </div>
+                </div>
+
+                <div class="form-row m-4">
+                    <div class="col-12">
+                        <button type="button" class="btn btn-success align-text-bottom" id="getDirections">Generate
+                            Route!</button>
+                        <br /><small class='pb-4'><i>Please generate route before submitting!</i></small>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div id="map"></div>
+                    </div>
+                    <div class="col-6">
+                        <div id="directionsPanel"></div>
+                    </div>
+                </div>
+
+
+
+                <div class="form-row m-4">
+                    <div class="col-12">
+                        <br>
+                        <input type="hidden" name="distance" id="total">
+                        <button type="submit" class="btn btn-primary mx-auto" id="submit Form">Create Event</button>
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <script>
+        var now = new Date().toISOString();
+        now = now.substr(0, 16);
+        console.log(now);
+        document.getElementById("eventDateTime").setAttribute('min', now)
+
+
+
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                title: "",
+                date: "",
+                time: "",
+                capacity: "",
+                origin: "",
+                destination: "",
+                submitAttempt: false
+            },
+            methods: {
+                validateForm: function () {
+                    if (this.titleError) {
+                        event.preventDefault();
+                        this.submitAttempt = true;
+                    }
+                }
+            },
+            computed: {
+                titleError: function () {
+                    if (this.title.length === 0) {
+                        return "You have to give a title to the Event!"
+                    }
+                },
+                dateError: function () {
+                    if (this.date.length === 0) {
+                        return "You have to give a Date to the Event!"
+                    }
+                },
+                timeError: function () {
+                    if (this.time.length === 0) {
+                        return "You have to give a Durration to the Event!"
+                    }
+                },
+                capError: function () {
+                    if (this.capacity.length === 0) {
+                        return "You have to limit the capacity of the Event!"
+                    }
+                },
+                originError: function () {
+                    if (this.origin.length === 0) {
+                        return "Please input the starting location!"
+                    }
+                },
+                desError: function () {
+                    if (this.destination.length === 0) {
+                        return "Please input the end location!"
+                    }
+                }
+            }
+
+        })
+    </script>
+    <script src=js/google_maps_api.js> </script> <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7cotLdg-POVfNJD7AqHuB4m2Wi-Styic">
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
+    </script>
+
+</body>
+
+</html>

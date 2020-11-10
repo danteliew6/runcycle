@@ -16,10 +16,10 @@ function getAllEvents() {
 
             for (events of data.records) {
                 if (events.activity == "Run") {
-                    var image = "run.png";
+                    var image = "img/run.png";
                 }
                 else{
-                    var image = "cycle.png";
+                    var image = "img/cycle.png";
                 }
 
                 if (events.participants >= events.capacity) {
@@ -178,46 +178,49 @@ function getWeather(){
     var nowStr = now.toISOString();
     nowDate = nowStr.slice(0, 10);
 
-    function createTD(textContents) {
-        let td = document.createElement('td');
-        let text = document.createTextNode(textContents);
-        td.appendChild(text);
-        return td;
-    }
-
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200){ 
-                //Only items has the data
-            
-                var tbody = document.getElementById("tbody");
-                var obj = JSON.parse(this.responseText);   
-                var len = obj.items.length;
-                var weatherDays = ['Today', '2 Days', '4 Days']
-                    for(i = 0  ; i < len ; i++ ){   
-                        let output = "";
-                        //Forecasts holds the important data
-                        var forecast = obj.items[i].forecasts[i];
-                        var text = forecast.forecast;
-                        var temp = forecast.temperature;
-                        var humidity = forecast.relative_humidity;
-                                            
-                        output+= 
-                            `<tr><th>${weatherDays[i]}</th>
-                                <td>${text}</td>  
-                                <td>${temp.low}</td>
-                                <td>${temp.high}</td>
-                                <td>${humidity.low}</td>
-                                <td>${humidity.high}</td>
-                            </tr>`
-                        
-                        tbody.innerHTML += output;
-                    }             
-            }
-          }
-           
+            var tbody = document.getElementById("tbody");
+            var obj = JSON.parse(this.responseText);   
+            console.log(obj);
+
+            //Take only the latest updated data
+            var latest = obj.items[obj.items.length - 1];
+            console.log(latest);
+            let output = "";
+
+            //Latest forecast data for the 4 days is here
+            var forecast_data = latest.forecasts;
+            console.log(forecast_data);
+
+            let forecast_data_length = forecast_data.length;
+
+            for(j = 0 ; j < forecast_data_length ; j++ ){
+                var date = forecast_data[j].date;
+                var forecast_text = forecast_data[j].forecast;
+                var temp = forecast_data[j].temperature;
+                var humidity = forecast_data[j].relative_humidity;
+
+                output += 
+
+                    `
+                    <tr>
+                        <td>${date}</td>  
+                        <td>${forecast_text}</td>  
+                        <td>${temp.low}</td>  
+                        <td>${temp.high}</td>  
+                        <td>${humidity.low}</td>  
+                        <td>${humidity.high}</td>  
+                    </tr>`
+
+            }             
+            tbody.innerHTML += output;
+        }
+      }
+
           var gotoURL = "https://api.data.gov.sg/v1/environment/4-day-weather-forecast?date="+ encodeURIComponent(nowDate);
           xhr.open("GET", gotoURL, true);
           xhr.send();
 
-};
+    };
