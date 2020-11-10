@@ -76,60 +76,69 @@
 
     <div class="container mt-5">
         <!-- map modal -->
-        <!-- Button trigger modal -->
-        <button type="button" id="showMap" class="btn btn-primary" data-toggle="modal" data-target="#mapModal">
-            Show Map
-        </button>
+        <div class = "row">
+            <div class = "col-6">
+                <!-- Button trigger modal -->
+                <button type="button" id="showMap" class="btn btn-primary" data-toggle="modal" data-target="#mapModal">
+                    Show Map
+                </button>
 
-        <!-- Modal -->
-        <div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="mapModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="mapModalLabel">Directions</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                <!-- Modal -->
+                <div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="mapModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="mapModalLabel">Directions</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="text-center" id="map"></div>
+                                <div id="directionsPanel"></div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <div class="text-center" id="map"></div>
-                        <div id="directionsPanel"></div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+
+                <!-- participants modal -->
+                <!-- Button trigger modal -->
+                <button type="button" id="showParticipants" class="btn btn-primary ml-4" data-toggle="modal"
+                    data-target="#participantsList">
+                    Participants
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="participantsList" tabindex="-1" role="dialog"
+                    aria-labelledby="participantsListLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="participantsListLabel">Participants</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table table-striped border-dark">
+                                    <tbody id="participants"></tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        
 
-        <!-- participants modal -->
-        <!-- Button trigger modal -->
-        <button type="button" id="showParticipants" class="btn btn-primary" data-toggle="modal"
-            data-target="#participantsList">
-            Participants
-        </button>
-
-        <!-- Modal -->
-        <div class="modal fade" id="participantsList" tabindex="-1" role="dialog"
-            aria-labelledby="participantsListLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="participantsListLabel">Participants</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <table class="table table-striped border-dark">
-                            <tbody id="participants"></tbody>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
+            <!-- Join Event Button -->
+            <div class = "col-6 text-right" id = "joinEvent">
             </div>
         </div>
     </div>
