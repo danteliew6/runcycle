@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 if (isset($_SESSION['token'])) {
     http_response_code(200);
