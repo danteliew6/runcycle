@@ -57,18 +57,3 @@ CREATE TABLE participants (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 
 
---
--- Table structure for table 'comment'
---
-
-DROP TABLE IF EXISTS comment;
-CREATE TABLE IF NOT EXISTS comment (
-  comment_id int(11) NOT NULL AUTO_INCREMENT,
-  event_id int(11) NOT NULL,
-  username varchar(30) NOT NULL,
-  content varchar(100) NOT NULL,
-  created_datetime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT comment_pk PRIMARY KEY (comment_id),
-  CONSTRAINT comment_fk1 FOREIGN KEY (event_id) references event(event_id),
-  CONSTRAINT comment_fk2 FOREIGN KEY (username) references user(username)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8; 
