@@ -10,7 +10,7 @@ function getAllEvents() {
         if (this.readyState == 4 && this.status == 200) {
             // console.log(this.responseText);
             const data = JSON.parse(this.responseText);
-            console.log(data);
+            // console.log(data);
             let upcomingEvents = document.getElementById('upcomingEvents');
             upcomingEvents.innerHTML = "";
 
@@ -183,16 +183,16 @@ function getWeather(){
           if (this.readyState == 4 && this.status == 200){ 
             var tbody = document.getElementById("tbody");
             var obj = JSON.parse(this.responseText);   
-            console.log(obj);
+            // console.log(obj);
 
             //Take only the latest updated data
             var latest = obj.items[obj.items.length - 1];
-            console.log(latest);
+            // console.log(latest);
             let output = "";
 
             //Latest forecast data for the 4 days is here
             var forecast_data = latest.forecasts;
-            console.log(forecast_data);
+            // console.log(forecast_data);
 
             let forecast_data_length = forecast_data.length;
 
