@@ -92,33 +92,52 @@ Join/Cancel:
 
 
 Create Event
-	Users will access the Create Events page via the Navigation Bar on the top right hand corner of the webpage.
-	User will key in their event details based on the form given
-		Event Title
-		Event Type (Run/Cycle)
-		Date
-		Time
-		Duration
-		No. of Participants allowed
-		Description of event
-	User will then generate the desired activity route using the Google Maps API by keying in their Start and End location
-	Users will then click on the create event button and the event will be submitted into the database and can be viewed and accessed via the Homepage.
+Users will access the Create Events page via the Navigation Bar on the top right hand corner of the webpage.
+User will key in their event details based on the form given
+	
+Event Title
+
+Event Type (Run/Cycle)
+
+Date
+
+Time
+
+Duration
+
+No. of Participants allowed
+
+
+Description of event
+
+User will then generate the desired activity route using the Google Maps API by keying in their Start and End location
+
+Users will then click on the create event button and the event will be submitted into the database and can be viewed and accessed via the Homepage.
+
 
 About Us
-	This page shows an overview of the developers of the website as well as a brief description on what the website is about.
+	
+This page shows an overview of the developers of the website as well as a brief description on what the website is about.
 	
 	
 	
 # Authors and acknowledgment
 
 Group Members:
-	1. Dante Liew Zhen Ting
-	2. Bryan Koh Qi Yan
-	3. Wang Wei Min
-	4. Remus Chan Koon Hong
-	5. Lim Wei Zhi
+
+1. Dante Liew Zhen Ting
+	
+2. Bryan Koh Qi Yan
+	
+3. Wang Wei Min
+	
+4. Remus Chan Koon Hong
+	
+5. Lim Wei Zhi
+	
 
 API Acknowledgment:
+
 	1. Google Maps API
 	2. Google Directions API
 	3. Weather Forecast API from Data.gov.sg
