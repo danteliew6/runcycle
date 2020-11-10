@@ -1,10 +1,10 @@
 # Runcycle
 
 
-# Github Link:
+Github Link:
   https://github.com/danteliew6/runcycle
 
-# Deployed Web App Link:
+Deployed Web App Link:
   http://runcycle-wad2.000webhostapp.com/
 
 # Setting up the Application:
