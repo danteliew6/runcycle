@@ -2,7 +2,6 @@ window.addEventListener('load', getMyEvents);
 window.addEventListener('load', getEventsHistory);
 
 
-
 function getMyEvents() {
     const url = "functions/getMyEvents.php?is_upcoming=true";
     const request = new XMLHttpRequest();
@@ -11,60 +10,70 @@ function getMyEvents() {
         if (this.readyState == 4 && this.status == 200) {
             // console.log(this.responseText);
             const data = JSON.parse(this.responseText);
-            console.log(data);
+            // console.log(data);
             let myEvents = document.getElementById('myEvents');
             myEvents.innerHTML = "";
 
-            for (events of data.records) {
-                if (events.activity == "Run") {
-                    var image = "img/run.png";
-                }
-                else{
-                    var image = "img/cycle.png";
-                }
-
-                if (events.participants >= events.capacity) {
-                    var disabled = `disabled`;
-                    var button = `btn btn-secondary`;
-                    var buttonMsg = `Event Full`;
-                }
-                else {
-                    var disabled = ``; 
-                    var button = `btn btn-success`;
-                    var buttonMsg = `Join Event`;
-                }
-
-                // console.log(events);
+            if (data.records.length == 0) {
                 myEvents.innerHTML += 
-                ` <div class="col-lg-3 col-md-6 m-4">
-                    <div class="card h-100 border-1 shadow" style="width: 18rem;">
-                      <img class="card-img-top" src="${image}" style = "background-color:grey;" alt="Image cannot be displayed">
-                    <div class="card-body text-left">
-                      <h4 class="card-title">${events.title}</h4> 
-                      <p class="card-text">
-                        Start Point: <br><b>${events.start_point}</b> <br><br>
-                        End Point: <br><b>${events.end_point}</b><br><br>
-                        Date and Time:<br><b>${events.event_datetime}</b>
-                      </p>
-                    </div>
-                    <div class="card-body text-left">
-
-                    </div>
-                    <div class="card-footer text-center p-3"> 
-                        <div class = "text-left">
-                            <small>
-                            Capacity: ${events.participants}/${events.capacity}<br>
-                            <b>Created by: ${events.username}</b>
-                            </small><br><br>  
-                        </div>
-                      <a href="event.html?event_id=${events.event_id}" class="btn btn-dark mr-2">Details</a>
-                      <button type = "button" class="${button}" id = "event${events.event_id}" onclick = "checkHost(${events.event_id})" ${disabled}>${buttonMsg}</button>
-                    </div>
-                    </div>
-                </div>`;
-
-                checkJoined(events.event_id);
+                `<h2>You have no upcoming events. Click <a href = "create_events.html">here</a>  to create one now!</h2>`;
             }
+            else {
+
+                for (events of data.records) {
+                    if (events.activity == "Run") {
+                        var image = "img/run.png";
+                    }
+                    else{
+                        var image = "img/cycle.png";
+                    }
+    
+                    if (events.participants >= events.capacity) {
+                        var disabled = `disabled`;
+                        var button = `btn btn-secondary`;
+                        var buttonMsg = `Event Full`;
+                    }
+                    else {
+                        var disabled = ``; 
+                        var button = `btn btn-success`;
+                        var buttonMsg = `Join Event`;
+                    }
+    
+                    // console.log(events);
+                    myEvents.innerHTML += 
+                    ` <div class="col-lg-3 col-md-6 m-4">
+                        <div class="card h-100 border-1 shadow" style="width: 18rem;">
+                          <img class="card-img-top" src="${image}" style = "background-color:grey;" alt="Image cannot be displayed">
+                        <div class="card-body text-left">
+                          <h4 class="card-title">${events.title}</h4> 
+                          <p class="card-text">
+                            Start Point: <br><b>${events.start_point}</b> <br><br>
+                            End Point: <br><b>${events.end_point}</b><br><br>
+                            Date and Time:<br><b>${events.event_datetime}</b>
+                          </p>
+                        </div>
+                        <div class="card-body text-left">
+    
+                        </div>
+                        <div class="card-footer text-center p-3"> 
+                            <div class = "text-left">
+                                <small>
+                                Capacity: ${events.participants}/${events.capacity}<br>
+                                <b>Created by: ${events.username}</b>
+                                </small><br><br>  
+                            </div>
+                          <a href="event.html?event_id=${events.event_id}" class="btn btn-dark mr-2">Details</a>
+                          <button type = "button" class="${button}" id = "event${events.event_id}" onclick = "checkHost(${events.event_id})" ${disabled}>${buttonMsg}</button>
+                        </div>
+                        </div>
+                    </div>`;
+    
+                    checkJoined(events.event_id);
+                }
+            }
+            
+
+
         }
     }
     request.open("GET", `${url}`, true);
@@ -185,42 +194,48 @@ function getEventsHistory() {
         if (this.readyState == 4 && this.status == 200) {
             // console.log(this.responseText);
             const data = JSON.parse(this.responseText);
-            console.log(data);
+            // console.log(data);
             let eventsHistory = document.getElementById('eventsHistory');
             eventsHistory.innerHTML = "";
 
-            for (events of data.records) {
-                if (events.activity == "Run") {
-                    var image = "img/run.png";
-                }
-                else{
-                    var image = "img/cycle.png";
-                }
-                eventsHistory.innerHTML += 
-                ` <div class="col-lg-3 col-md-6 m-4">
-                    <div class="card h-100 border-1 shadow" style="width: 18rem;">
-                      <img class="card-img-top" src="${image}" style = "background-color:grey;" alt="Image cannot be displayed">
-                    <div class="card-body text-left">
-                      <h4 class="card-title">${events.title}</h4> 
-                      <p class="card-text">
-                        Start Point: <br><b>${events.start_point}</b> <br><br>
-                        End Point: <br><b>${events.end_point}</b><br><br>
-                        Date and Time:<br><b>${events.event_datetime}</b>
-                      </p>
-                    </div>
-                    <div class="card-body text-left">
 
-                    </div>
-                    <div class="card-footer text-center p-3"> 
-                        <div class = "text-left">
-                            <small>
-                            Capacity: ${events.participants}/${events.capacity}<br>
-                            <b>Created by: ${events.username}</b>
-                            </small><br><br>  
+            if (data.records.length != 0) {
+                for (events of data.records) {
+                    if (events.activity == "Run") {
+                        var image = "img/run.png";
+                    }
+                    else{
+                        var image = "img/cycle.png";
+                    }
+                    eventsHistory.innerHTML += 
+                    ` <div class="col-lg-3 col-md-6 m-4">
+                        <div class="card h-100 border-1 shadow" style="width: 18rem;">
+                          <img class="card-img-top" src="${image}" style = "background-color:grey;" alt="Image cannot be displayed">
+                        <div class="card-body text-left">
+                          <h4 class="card-title">${events.title}</h4> 
+                          <p class="card-text">
+                            Start Point: <br><b>${events.start_point}</b> <br><br>
+                            End Point: <br><b>${events.end_point}</b><br><br>
+                            Date and Time:<br><b>${events.event_datetime}</b>
+                          </p>
                         </div>
-                    </div>
-                    </div>
-                </div>`;
+                        <div class="card-body text-left">
+    
+                        </div>
+                        <div class="card-footer text-center p-3"> 
+                            <div class = "text-left">
+                                <small>
+                                Capacity: ${events.participants}/${events.capacity}<br>
+                                <b>Created by: ${events.username}</b>
+                                </small><br><br>  
+                            </div>
+                        </div>
+                        </div>
+                    </div>`;
+                }
+            }
+            else {
+                eventsHistory.innerHTML += `<h2>You have not completed any events yet.</h2>`;
             }
         }
     }
