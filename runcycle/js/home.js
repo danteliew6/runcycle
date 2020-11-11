@@ -172,9 +172,37 @@ function cancelEvent(isHost, event_id) {
 
 }
 
+function findkey(inString){
+    var weatherwords = {
+        rain:"img/rainy.png", 
+        showers:"img/rainy.png", 
+        thundery:"img/thunder.png" , 
+        fair:"img/sunny.png" , 
+        hazy:"img/windy.png" , 
+        cloudy:"img/cloudy.png", 
+        overcast:"img/cloudy",
+    }
+    const keys =Object.keys(weatherwords)
+    for (k of keys) {
+        if(inString.toLowerCase().search(k) != -1){
+            return weatherwords[k]
+        }
+    }
+}
+
+
 function getWeather(){
     //Getting the current date
     now = new Date();
+    var weekday = new Array(7);
+    weekday[0] = "Sunday";
+    weekday[1] = "Monday";
+    weekday[2] = "Tuesday";
+    weekday[3] = "Wednesday";
+    weekday[4] = "Thursday";
+    weekday[5] = "Friday";
+    weekday[6] = "Saturday";
+
     var nowStr = now.toISOString();
     nowDate = nowStr.slice(0, 10);
 
@@ -198,21 +226,25 @@ function getWeather(){
 
             for(j = 0 ; j < forecast_data_length ; j++ ){
                 var date = forecast_data[j].date;
+                
                 var forecast_text = forecast_data[j].forecast;
                 var temp = forecast_data[j].temperature;
                 var humidity = forecast_data[j].relative_humidity;
-
+                var d = new Date(date);
+                var n = weekday[d.getDay()];
+                var result =  findkey(forecast_text);
                 output += 
 
                     `
-                    <tr>
-                        <td>${date}</td>  
-                        <td>${forecast_text}</td>  
-                        <td>${temp.low}</td>  
-                        <td>${temp.high}</td>  
-                        <td>${humidity.low}</td>  
-                        <td>${humidity.high}</td>  
-                    </tr>`
+                    <div class="card text-center mb-3">
+                        <img id="weatherpic" class="card-img-top mx-auto d-block" src=${result} alt="Card image cap">
+                            <div class="card-body">
+                            ${n} ${date} 
+                            <h5 class="card-title">${forecast_text}</h5>
+                            <p class="card-text">Low: ${temp.low} &deg; High: ${temp.high}&deg;</p>
+                            </div>
+                    </div>
+                    `
 
             }             
             tbody.innerHTML += output;
