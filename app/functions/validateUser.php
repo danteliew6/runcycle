@@ -9,7 +9,7 @@
     // var_dump($dao -> validateUser($username, $password));
 
     $message = 'Invalid login details';
-    if($dao->validateUser($username, $password)) {
+    if(!empty($username) && $dao->validateUser($username, $password)) {
         session_start();
         $message = 'Login successful!';
         $_SESSION['token'] = $username;
