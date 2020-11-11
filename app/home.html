@@ -20,6 +20,12 @@
 
 <script src = "js/home.js"></script>
 <script src = "js/authenticate.js"></script>
+<style>
+  #weatherpic{
+    padding: 20px;
+    width: 65%;
+  }
+ </style>
 </head>
 
 <body>
@@ -76,34 +82,10 @@
 
 
     <!-- Weather API-->
-  <div class='container mt-5 mb-5"'>
-    <div class="row">
-      <div class="col">
-          <h2>Weather for the next 4-days</h2>
-
-          <table class='table table-bordered table-striped text-center'>
-              <thead>
-                  <tr>
-                      <th scope="col" rowspan='2'>Day</th>
-                      <th scope="col" rowspan='2'>Forecast</th>
-                      <th scope="col" colspan='2'>Temperature °C</th>
-                      <th scope="col" colspan='2'>Humid</th>
-                  </tr>
-                  <tr>
-                      <td>Low</td>
-                      <td>High</td>
-                      <td>Low</td>
-                      <td>High</td>
-                  </tr>
-              </thead>
-              
-              <tbody id='tbody'></tbody>
-          </table>
-
-        </div> 
+    <div class='container' style="padding: 0px; margin-top: 10px;">
+      <div class="card-group" id='tbody'>
+      </div>
     </div>
-  </div>
-
 
     
     <!-- /.row -->
