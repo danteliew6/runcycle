@@ -100,6 +100,9 @@
                 if (returnError.search('password') != -1) {
                     errorMessage.innerHTML += "Invalid Password! <br>";
                 }
+                if (returnError.search('usernametaken' != -1)) {
+                    errorMessage.innerHTML += "Username taken! <br>";
+                }
             }
             else {
                 document.getElementById('errorMessage').style.display = "none";

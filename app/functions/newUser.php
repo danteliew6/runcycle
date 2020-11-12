@@ -7,8 +7,15 @@
 
     if ($isValidUsername && $isValidEmail && $isValidPassword) {
         $isAddOk = $dao -> newUser($_POST['username'], $_POST['password'], $_POST['email']);
-        header("Location: ../login.html");
-        exit();
+        if ($isAddOk) {
+            header("Location: ../login.html");
+            exit();
+        }
+        else {
+            header("Location: ../register.html?error=usernametaken");
+            exit();
+        }
+        
     }
 
     $errorMessage = '';
